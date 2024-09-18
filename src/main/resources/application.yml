@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: book-rest-api
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/bookrestapi"
+    username: "postgres"
+    password: "AromanouskiJ2007"
+
+  jpa:
+    hibernate:
+      dialect: "org.hibernate.dialect.PostgreSQLDialect"
+      ddl-auto: update
