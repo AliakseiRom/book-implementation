@@ -1,47 +1,59 @@
 package com.example.book_rest_api.api.service;
 
-
 import com.example.book_rest_api.api.model.Book;
 import com.example.book_rest_api.api.repository.BookRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
 public class BookService {
+    @Autowired
+    BookRepository bookRepository;
 
-    public BookService() {
+    public Book getBook(Integer id) {
+        try {
+            Optional<Book> savedBook = bookRepository.findById(id);
+            Book book = savedBook.get();
+            return book;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    public static ResponseEntity<Book> getBook(Integer id, BookRepository bookRepository) {
-        Optional<Book> bookData = bookRepository.findById(id);
-        return new ResponseEntity<>(bookData.get(), HttpStatus.OK);
-    }
-
-    public static ResponseEntity<Book> createBook(Book book, BookRepository bookRepository) {
+    public Book createBook(Book book) {
         Book savedBook = bookRepository.save(book);
-        return new ResponseEntity<>(savedBook, HttpStatus.CREATED);
+        return savedBook;
     }
 
-    public static ResponseEntity<Book> updateBook(Integer id, BookRepository bookRepository, Book book) {
-        Optional<Book> bookData = bookRepository.findById(id);
+    public Book updateBook(Integer id, Book book) {
+        Optional<Book> bookData;
+        try {
+            bookData = bookRepository.findById(id);
+        } catch (Exception e) {
+            return null;
+        }
 
         Book savedBook = bookData.get();
         savedBook.setTitle(book.getTitle());
         savedBook.setAuthor(book.getAuthor());
         savedBook.setId(id);
 
-        return new ResponseEntity<>(bookRepository.save(savedBook), HttpStatus.OK);
+        return savedBook;
     }
 
-    public static ResponseEntity<Book> deleteBook(Integer id, BookRepository bookRepository) {
-        bookRepository.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public Book deleteBook(Integer id) {
+        try {
+            bookRepository.deleteById(id);
+        } catch (Exception e) {
+            return null;
+        }
+
+        return null;
     }
 
-    public static ResponseEntity<Book> deleteAllBooks(BookRepository bookRepository) {
+    public Book deleteAllBooks() {
         bookRepository.deleteAll();
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return null;
     }
 }

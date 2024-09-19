@@ -2,7 +2,6 @@ package com.example.book_rest_api.api.model;
 
 import jakarta.persistence.*;
 
-
 @Entity
 @Table(name = "book")
 public class Book {
@@ -16,12 +15,6 @@ public class Book {
 
     @Column(name = "author")
     private String author;
-
-
-
-    public Book() {
-    }
-
 
     public int getId() {
         return id;
