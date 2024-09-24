@@ -35,12 +35,12 @@ public class BookController {
     @DeleteMapping(path = "/delete/{id}")
     public ResponseEntity<Book> deleteBook(@PathVariable("id") Integer id) {
         bookService.deleteBook(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/delete/all")
     public ResponseEntity<Book> deleteAllBooks() {
         bookService.deleteAllBooks();
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

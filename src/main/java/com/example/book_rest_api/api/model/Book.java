@@ -16,10 +16,6 @@ public class Book {
     @Column(name = "author")
     private String author;
 
-    public int getId() {
-        return id;
-    }
-
     public String getAuthor() {
         return author;
     }
@@ -28,7 +24,7 @@ public class Book {
         return title;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
